@@ -621,7 +621,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <div style={{ backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "4px", padding: "2.5rem", boxShadow: "0 8px 32px rgba(0,0,0,0.2)" }}>
+            <div style={{ backgroundColor: "#FFFFFF", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "4px", padding: "2.5rem", boxShadow: "0 8px 32px rgba(0,0,0,0.2)" }}>
               <ConsultationForm dark />
             </div>
           </div>
