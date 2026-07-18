@@ -6,6 +6,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import Layout from "@/components/Layout";
+import LeadForm from "@/components/LeadForm";
 
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663303940668/HR4QEbSY8a9WeoViWm5HgH/vital-exec-office-7Ng9FMY27reajLSRMXXX2q.webp";
 const SIDE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663303940668/HR4QEbSY8a9WeoViWm5HgH/vital-tax-desk-e5TVkRLDrqKuWmnAjzQGZv.webp";
@@ -27,91 +28,7 @@ function useScrollReveal() {
 }
 
 function ConsultationForm() {
-  const [form, setForm] = useState({ name: "", phone: "", situation: "", qualifies: "" });
-  const [submitted, setSubmitted] = useState(false);
-
-  const inputStyle: React.CSSProperties = {
-    width: "100%", padding: "0.75rem 1rem",
-    backgroundColor: "rgba(255,255,255,0.08)",
-    border: "1.5px solid rgba(255,255,255,0.2)",
-    color: "#FFFFFF", fontFamily: "'Inter', sans-serif", fontSize: "0.9375rem",
-    outline: "none", borderRadius: "2px", boxSizing: "border-box",
-    transition: "border-color 180ms ease",
-  };
-  const labelStyle: React.CSSProperties = {
-    display: "block", fontFamily: "'Inter', sans-serif", fontSize: "0.75rem",
-    fontWeight: 600, color: "rgba(255,255,255,0.75)", letterSpacing: "0.04em", marginBottom: "0.375rem",
-  };
-
-  if (submitted) {
-    return (
-      <div style={{ textAlign: "center", padding: "3rem 1rem" }}>
-        <div style={{ width: "48px", height: "48px", borderRadius: "50%", backgroundColor: "rgba(82,183,136,0.2)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1rem" }}>
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 11l5 5 9-9" stroke="#52B788" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-        </div>
-        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.375rem", fontWeight: 700, color: "#FFFFFF", marginBottom: "0.5rem" }}>Request Received</p>
-        <p style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.6 }}>The firm will review your inquiry and be in touch to discuss next steps.</p>
-      </div>
-    );
-  }
-
-  return (
-    <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} style={{ display: "flex", flexDirection: "column", gap: "1.125rem" }}>
-      <div>
-        <label style={labelStyle}>Full Name</label>
-        <input type="text" required placeholder="Your full name" value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })} style={inputStyle}
-          onFocus={(e) => { e.currentTarget.style.borderColor = "#52B788"; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)"; }}
-        />
-      </div>
-      <div>
-        <label style={labelStyle}>Phone Number</label>
-        <input type="tel" required placeholder="Best number to reach you" value={form.phone}
-          onChange={(e) => setForm({ ...form, phone: e.target.value })} style={inputStyle}
-          onFocus={(e) => { e.currentTarget.style.borderColor = "#52B788"; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)"; }}
-        />
-      </div>
-      <div>
-        <label style={labelStyle}>Briefly describe your tax situation</label>
-        <textarea rows={3} placeholder="e.g., high W-2 income, investment income, business income..."
-          value={form.situation} onChange={(e) => setForm({ ...form, situation: e.target.value })}
-          style={{ ...inputStyle, resize: "vertical", minHeight: "80px" }}
-          onFocus={(e) => { e.currentTarget.style.borderColor = "#52B788"; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)"; }}
-        />
-      </div>
-      <div>
-        <label style={labelStyle}>Does your annual income exceed $350,000?</label>
-        <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.5)", marginBottom: "0.5rem", lineHeight: 1.5 }}>
-          If not, please do not request an appointment. This firm is structured specifically for high-income taxpayers.
-        </p>
-        <select required value={form.qualifies} onChange={(e) => setForm({ ...form, qualifies: e.target.value })}
-          style={{ ...inputStyle, cursor: "pointer" }}>
-          <option value="">Please select...</option>
-          <option value="yes-income">Yes, my annual income exceeds $350,000</option>
-          <option value="yes-obligation">No, but I owe $50,000+ in federal taxes</option>
-          <option value="no">No, my income is below $350,000</option>
-        </select>
-      </div>
-      <button type="submit" style={{
-        marginTop: "0.25rem", padding: "0.9375rem 2rem",
-        backgroundColor: "#FFFFFF", color: "#1B4332",
-        fontFamily: "'Inter', sans-serif", fontSize: "0.8125rem", fontWeight: 700,
-        letterSpacing: "0.07em", textTransform: "uppercase",
-        border: "2px solid #FFFFFF", cursor: "pointer", borderRadius: "2px",
-        transition: "background-color 200ms ease, box-shadow 200ms ease, transform 160ms ease",
-      }}
-        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#F5F4F0"; e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.15)"; }}
-        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#FFFFFF"; e.currentTarget.style.boxShadow = "none"; }}
-        onMouseDown={(e) => { e.currentTarget.style.transform = "scale(0.97)"; }}
-        onMouseUp={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
-      >
-        Submit Consultation Request
-      </button>
-    </form>
-  );
+  return <LeadForm height={620} />;
 }
 
 const whatItems = [

@@ -6,6 +6,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import Layout from "@/components/Layout";
+import LeadForm from "@/components/LeadForm";
 import { useFadeUp } from "@/hooks/useFadeUp";
 
 const HERO_BG =
@@ -102,19 +103,6 @@ const faqs = [
 
 export default function TaxStrategy() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [form, setForm] = useState({ name: "", phone: "", income: "", message: "" });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
 
   const ref1 = useFadeUp();
   const ref2 = useFadeUp();
@@ -457,50 +445,7 @@ export default function TaxStrategy() {
             </div>
 
             <div style={{ backgroundColor: "#FFFFFF", padding: "2.75rem", border: "1px solid #E5E7EB" }}>
-              {submitted ? (
-                <div style={{ textAlign: "center", padding: "2.5rem 0" }}>
-                  <div style={{ width: "52px", height: "52px", backgroundColor: "#EEF5F1", border: "2px solid #1B4332", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.5rem" }}>
-                    <span style={{ color: "#1B4332", fontSize: "1.375rem" }}>&#10003;</span>
-                  </div>
-                  <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.625rem", fontWeight: 700, color: "#111827", marginBottom: "0.875rem" }}>Request Received</h3>
-                  <p style={{ fontSize: "0.9375rem", color: "#6B7280", lineHeight: 1.75 }}>Thank you for reaching out. A member of the firm will be in touch shortly to discuss your situation.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-                  <div style={{ marginBottom: "0.5rem" }}>
-                    <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.375rem", fontWeight: 700, color: "#111827", marginBottom: "0.375rem" }}>Schedule a Consultation</h3>
-                    <p style={{ fontSize: "0.8125rem", color: "#9CA3AF" }}>All fields marked * are required.</p>
-                  </div>
-                  <div>
-                    <label className="form-label" htmlFor="ts-name">Full Name *</label>
-                    <input id="ts-name" name="name" type="text" required value={form.name} onChange={handleChange} placeholder="Your full name" className="form-input" />
-                  </div>
-                  <div>
-                    <label className="form-label" htmlFor="ts-phone">Phone Number *</label>
-                    <input id="ts-phone" name="phone" type="tel" required value={form.phone} onChange={handleChange} placeholder="Best number to reach you" className="form-input" />
-                  </div>
-                  <div>
-                    <label className="form-label" htmlFor="ts-income">Annual Income Range *</label>
-                    <select id="ts-income" name="income" required value={form.income} onChange={handleChange} className="form-input">
-                      <option value="">Select your income range</option>
-                      <option value="350k-500k">$350,000 – $500,000</option>
-                      <option value="500k-750k">$500,000 – $750,000</option>
-                      <option value="750k-1m">$750,000 – $1,000,000</option>
-                      <option value="1m+">$1,000,000+</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="form-label" htmlFor="ts-message">Briefly describe your situation</label>
-                    <textarea id="ts-message" name="message" value={form.message} onChange={handleChange} placeholder="e.g. Business owner, large federal bill, multiple income streams..." rows={3} className="form-input" style={{ resize: "vertical" }} />
-                  </div>
-                  <button type="submit" className="btn-primary" style={{ width: "100%", justifyContent: "center" }}>
-                    Submit — Request Consultation
-                  </button>
-                  <p style={{ fontSize: "0.6875rem", color: "#9CA3AF", lineHeight: 1.6, textAlign: "center" }}>
-                    No email required. Your information will not be shared with third parties.
-                  </p>
-                </form>
-              )}
+              <LeadForm height={620} />
             </div>
           </div>
         </div>

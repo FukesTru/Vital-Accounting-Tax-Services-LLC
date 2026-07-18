@@ -9,6 +9,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import Layout from "@/components/Layout";
+import LeadForm from "@/components/LeadForm";
 
 // Premium CDN images
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663303940668/HR4QEbSY8a9WeoViWm5HgH/vital-exec-office-7Ng9FMY27reajLSRMXXX2q.webp";
@@ -98,99 +99,8 @@ const areas = [
   { label: "Morris County, NJ", href: "/service-areas/morris-county-nj" },
 ];
 
-function ConsultationForm({ dark = false }: { dark?: boolean }) {
-  const [form, setForm] = useState({ name: "", phone: "", situation: "", qualifies: "" });
-  const [submitted, setSubmitted] = useState(false);
-  const inputStyle = {
-    width: "100%", padding: "0.75rem 1rem",
-    backgroundColor: dark ? "rgba(255,255,255,0.08)" : "#FFFFFF",
-    border: dark ? "1.5px solid rgba(255,255,255,0.2)" : "1.5px solid #E5E7EB",
-    color: dark ? "#FFFFFF" : "#111827",
-    fontFamily: "'Inter', sans-serif", fontSize: "0.9375rem",
-    outline: "none", borderRadius: "2px",
-    transition: "border-color 180ms ease, box-shadow 180ms ease",
-  };
-  const labelStyle = {
-    display: "block", fontFamily: "'Inter', sans-serif", fontSize: "0.75rem",
-    fontWeight: 600, color: dark ? "rgba(255,255,255,0.75)" : "#374151",
-    letterSpacing: "0.04em", marginBottom: "0.375rem",
-  };
-  if (submitted) {
-    return (
-      <div style={{ textAlign: "center", padding: "3rem 1rem" }}>
-        <div style={{ width: "48px", height: "48px", borderRadius: "50%", backgroundColor: dark ? "rgba(82,183,136,0.2)" : "#EEF5F1", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1rem" }}>
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 11l5 5 9-9" stroke="#1B4332" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-        </div>
-        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.375rem", fontWeight: 700, color: dark ? "#FFFFFF" : "#111827", marginBottom: "0.5rem" }}>Request Received</p>
-        <p style={{ fontSize: "0.9375rem", color: dark ? "rgba(255,255,255,0.65)" : "#6B7280", lineHeight: 1.6 }}>The firm will review your inquiry and be in touch to discuss next steps.</p>
-      </div>
-    );
-  }
-  return (
-    <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} style={{ display: "flex", flexDirection: "column", gap: "1.125rem" }}>
-      <div>
-        <label style={labelStyle}>Full Name</label>
-        <input type="text" required placeholder="Your full name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} style={inputStyle}
-          onFocus={(e) => { e.currentTarget.style.borderColor = "#1B4332"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(27,67,50,0.08)"; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = dark ? "rgba(255,255,255,0.2)" : "#E5E7EB"; e.currentTarget.style.boxShadow = "none"; }}
-        />
-      </div>
-      <div>
-        <label style={labelStyle}>Phone Number</label>
-        <input type="tel" required placeholder="Best number to reach you" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} style={inputStyle}
-          onFocus={(e) => { e.currentTarget.style.borderColor = "#1B4332"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(27,67,50,0.08)"; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = dark ? "rgba(255,255,255,0.2)" : "#E5E7EB"; e.currentTarget.style.boxShadow = "none"; }}
-        />
-      </div>
-      <div>
-        <label style={labelStyle}>Briefly describe your tax situation</label>
-        <textarea rows={3} placeholder="e.g., high W-2 income, investment income, business income, federal tax obligation..." value={form.situation} onChange={(e) => setForm({ ...form, situation: e.target.value })} style={{ ...inputStyle, resize: "vertical", minHeight: "80px" }}
-          onFocus={(e) => { e.currentTarget.style.borderColor = "#1B4332"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(27,67,50,0.08)"; }}
-          onBlur={(e) => { e.currentTarget.style.borderColor = dark ? "rgba(255,255,255,0.2)" : "#E5E7EB"; e.currentTarget.style.boxShadow = "none"; }}
-        />
-      </div>
-      <div>
-        <label style={labelStyle}>Does your annual income exceed $350,000?</label>
-        <p style={{ fontSize: "0.75rem", color: dark ? "rgba(255,255,255,0.5)" : "#9CA3AF", marginBottom: "0.5rem", lineHeight: 1.5 }}>
-          If not, please do not request an appointment. This firm is structured specifically for high-income taxpayers and those with significant federal tax obligations.
-        </p>
-        <select required value={form.qualifies} onChange={(e) => setForm({ ...form, qualifies: e.target.value })} style={{ ...inputStyle, cursor: "pointer" }}>
-          <option value="">Please select...</option>
-          <option value="yes-income">Yes, my annual income exceeds $350,000</option>
-          <option value="yes-obligation">No, but I owe $50,000+ in federal taxes</option>
-          <option value="no">No, my income is below $350,000</option>
-        </select>
-      </div>
-      <button
-        type="submit"
-        style={{
-          marginTop: "0.25rem",
-          padding: "0.9375rem 2rem",
-          backgroundColor: dark ? "#FFFFFF" : "#1B4332",
-          color: dark ? "#1B4332" : "#FFFFFF",
-          fontFamily: "'Inter', sans-serif", fontSize: "0.8125rem", fontWeight: 700,
-          letterSpacing: "0.07em", textTransform: "uppercase",
-          border: dark ? "2px solid #FFFFFF" : "2px solid #1B4332",
-          cursor: "pointer", borderRadius: "2px",
-          transition: "background-color 200ms ease, box-shadow 200ms ease, transform 160ms ease",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = dark ? "#F5F4F0" : "#2D6A4F";
-          e.currentTarget.style.borderColor = dark ? "#F5F4F0" : "#2D6A4F";
-          e.currentTarget.style.boxShadow = "0 4px 16px rgba(27,67,50,0.25)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = dark ? "#FFFFFF" : "#1B4332";
-          e.currentTarget.style.borderColor = dark ? "#FFFFFF" : "#1B4332";
-          e.currentTarget.style.boxShadow = "none";
-        }}
-        onMouseDown={(e) => { e.currentTarget.style.transform = "scale(0.97)"; }}
-        onMouseUp={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
-      >
-        Submit Consultation Request
-      </button>
-    </form>
-  );
+function ConsultationForm(_props: { dark?: boolean }) {
+  return <LeadForm height={620} />;
 }
 
 export default function Home() {

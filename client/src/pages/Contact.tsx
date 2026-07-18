@@ -4,6 +4,7 @@
  */
 import { Link } from "wouter";
 import Layout from "@/components/Layout";
+import LeadForm from "@/components/LeadForm";
 import { useFadeUp } from "@/hooks/useFadeUp";
 
 const OFFICE_IMG =
@@ -127,23 +128,7 @@ export default function Contact() {
                   Complete the form below. A member of the firm will contact you by phone to discuss your situation.
                 </p>
               </div>
-              <iframe
-                src="https://api.leadconnectorhq.com/widget/form/BE2emhMRiJKlZ92V3FSv"
-                style={{ width: "100%", height: "542px", border: "none", borderRadius: "10px" }}
-                id="inline-BE2emhMRiJKlZ92V3FSv"
-                data-layout="{'id':'INLINE'}"
-                data-trigger-type="alwaysShow"
-                data-trigger-value=""
-                data-activation-type="alwaysActivated"
-                data-activation-value=""
-                data-deactivation-type="neverDeactivate"
-                data-deactivation-value=""
-                data-form-name="Website Form (Vital Accounting & Tax Services LLC)"
-                data-height="542"
-                data-layout-iframe-id="inline-BE2emhMRiJKlZ92V3FSv"
-                data-form-id="BE2emhMRiJKlZ92V3FSv"
-                title="Website Form (Vital Accounting & Tax Services LLC)"
-              />
+              <LeadForm height={620} />
             </div>
           </div>
         </div>
